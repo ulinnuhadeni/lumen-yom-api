@@ -14,7 +14,7 @@ class CreatePropertiesTable extends Migration
     public function up()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::create('accomodations', function (Blueprint $table) {
+        Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('type_id')->nullable();
