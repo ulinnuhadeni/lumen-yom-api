@@ -8,7 +8,7 @@ class CreatePropertiesTypeTable extends Migration
 {
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('properties_type', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type');
             $table->timestamps();
@@ -16,6 +16,6 @@ class CreatePropertiesTypeTable extends Migration
     }
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('properties_type');
     }
 }
