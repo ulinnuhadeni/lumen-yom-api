@@ -28,7 +28,7 @@ class CreatePropertiesTable extends Migration
             $table->boolean('credit_card_payment');
             $table->timestamps();
 
-            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('type_id')->references('id')->on('properties_type');
             $table->foreign('contact_id')->references('id')->on('contacts');
         });
     }
