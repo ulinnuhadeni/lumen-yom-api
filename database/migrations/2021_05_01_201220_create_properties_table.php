@@ -13,11 +13,11 @@ class CreatePropertiesTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('type_id')->nullable();
+            $table->unsignedBigInteger('contact_id')->nullable();
             $table->string('license');
             $table->string('website');
             $table->string('address');
@@ -28,11 +28,9 @@ class CreatePropertiesTable extends Migration
             $table->boolean('credit_card_payment');
             $table->timestamps();
 
-            $table->foreign('type_id')->references('id')->on('properties_type');
-            
+            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('contact_id')->references('id')->on('contacts');
         });
-        Schema::enableForeignKeyConstraints();
-
     }
 
     /**
