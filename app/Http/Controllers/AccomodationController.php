@@ -22,24 +22,24 @@ class AccomodationController extends Controller
     }
 
     public function show($params){
+
         if(is_numeric($params)){
             $data = $this->accomodation->find($params);
             $dataResponse = $this->helper->jsonResponse('Accomodation data id : '.$params.'', $data, 200);
-            return $dataResponse;
         } else {
             $data = $this->accomodation->findBy('name', $params);
             $dataResponse = $this->helper->jsonResponse('Accomodation data : '.$params.'', $data, 200);
-            return $dataResponse;
         }
+
+        return $dataResponse;
     }
 
     public function store(Request $request){
 
         $input = $request->all();
-
         $data = $this->accomodation->insert($input);
-        $dataResponse = $this->helper->jsonResponse('Property data added', $data, 201);
 
+        $dataResponse = $this->helper->jsonResponse('Property data added', $data, 201);
         return $dataResponse;
     }
 
@@ -47,6 +47,7 @@ class AccomodationController extends Controller
 
         $input = $request->all();
         $data  = $this->accomodation->update($id, $input);
+
         $dataResponse = $this->helper->jsonResponse('Property data by id : '.$id.' updated', $data, 201);
         return $dataResponse;
     }
