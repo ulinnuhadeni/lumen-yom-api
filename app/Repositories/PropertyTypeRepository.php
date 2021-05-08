@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\PropertyType;
+use Illuminate\Support\Facades\DB;
 
 class PropertyTypeRepository {
 
@@ -10,12 +11,11 @@ class PropertyTypeRepository {
         $this->type = $type;
     }
 
-    public function jsonResponse($message, $data, $code){
-        return response()->json(['message' => $message, 'data' => $data], $code);
-    }
-
     public function get(){
-        $data = $this->type->orderBy('id')->get();
+        $data = DB::table('properties_type')
+                  ->select('type')
+                  ->orderBy('id')
+                  ->get();
         return $data;
     }
 

@@ -38,6 +38,7 @@ class AccomodationController extends Controller
     public function store(Request $request){
 
         $input = $request->all();
+
         $data = $this->accomodation->insert($input);
         $dataResponse = $this->accomodation->jsonResponse('Property data added', $data, 201);
 
