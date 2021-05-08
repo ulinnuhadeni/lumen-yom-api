@@ -54,12 +54,13 @@ class AccomodationController extends Controller
     public function destroy($id){
 
         $data  = $this->accomodation->delete($id);
+
         if ($data){
             $dataResponse = $this->helper->jsonResponse('Property data by id : '.$id.' deleted', $data, 201);
-            return $dataResponse;
+        } else {
+            $dataResponse = $this->helper->jsonResponse('Property data by id : '.$id.' not found', null, 404);
         }
 
-        $dataResponse = $this->helper->jsonResponse('Property data by id : '.$id.' not found', $data, 404);
         return $dataResponse;
     }
 
