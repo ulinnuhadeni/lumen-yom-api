@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Accomodation;
+use Illuminate\Support\Facades\DB;
 
 class AccomodationRepository {
 
@@ -15,7 +16,20 @@ class AccomodationRepository {
     }
 
     public function get(){
-        $data = $this->accomodation->orderBy('id')->get();
+        $data = $this->accomodation
+                     ->select('name',
+                              'type_id',
+                              'contact_id',
+                              'license',
+                              'website',
+                              'address',
+                              'country',
+                              'province',
+                              'postal_code',
+                              'order_total_per_month as order_total' ,
+                              'credit_card_payment')
+                     ->orderBy('id')
+                     ->get();
         return $data;
     }
 
