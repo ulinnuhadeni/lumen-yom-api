@@ -71,12 +71,13 @@ class PropertyContactController extends Controller
     {
 
         $data  = $this->contact->delete($id);
+
         if ($data) {
             $dataResponse = $this->helper->jsonResponse('Property data contact by id : ' . $id . ' deleted', $data, 201);
-            return $dataResponse;
+        } else {
+            $dataResponse = $this->helper->jsonResponse('Property data contact by id : ' . $id . ' not found', $data, 404);
         }
 
-        $dataResponse = $this->helper->jsonResponse('Property data contact by id : ' . $id . ' not found', $data, 404);
         return $dataResponse;
     }
 }

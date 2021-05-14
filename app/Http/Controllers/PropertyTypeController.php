@@ -70,12 +70,13 @@ class PropertyTypeController extends Controller
     {
 
         $data  = $this->type->delete($id);
+
         if ($data) {
             $dataResponse = $this->helper->jsonResponse('Property data type by id : ' . $id . ' deleted', $data, 201);
-            return $dataResponse;
+        } else {
+            $dataResponse = $this->helper->jsonResponse('Property data type by id : ' . $id . ' not found', $data, 404);
         }
 
-        $dataResponse = $this->helper->jsonResponse('Property data type by id : ' . $id . ' not found', $data, 404);
         return $dataResponse;
     }
 }
