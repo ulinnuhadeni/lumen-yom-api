@@ -51,7 +51,7 @@ class PropertyContactController extends Controller
         $input['password'] = Hash::make($request->password);
 
         $data = $this->contact->insert($input);
-        $dataResponse = $this->helper->jsonResponse('Property data contact added', $data, 201);
+        $dataResponse = $this->helper->jsonResponse('Contact data added', $data, 201);
 
         return $dataResponse;
     }
@@ -63,7 +63,7 @@ class PropertyContactController extends Controller
         $input['password'] = Hash::make($request->password);
 
         $data  = $this->contact->update($id, $input);
-        $dataResponse = $this->helper->jsonResponse('Property data contact by id : ' . $id . ' updated', $data, 201);
+        $dataResponse = $this->helper->jsonResponse('Contact data by id : ' . $id . ' updated', $data, 201);
         return $dataResponse;
     }
 
@@ -73,9 +73,9 @@ class PropertyContactController extends Controller
         $data  = $this->contact->delete($id);
 
         if ($data) {
-            $dataResponse = $this->helper->jsonResponse('Property data contact by id : ' . $id . ' deleted', $data, 201);
+            $dataResponse = $this->helper->jsonResponse('Contact data by id : ' . $id . ' deleted', $data, 201);
         } else {
-            $dataResponse = $this->helper->jsonResponse('Property data contact by id : ' . $id . ' not found', $data, 404);
+            $dataResponse = $this->helper->jsonResponse('Contact data by id : ' . $id . ' not found', $data, 404);
         }
 
         return $dataResponse;
