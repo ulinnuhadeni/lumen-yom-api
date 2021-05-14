@@ -13,6 +13,7 @@ class CreatePropertiesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -31,6 +32,7 @@ class CreatePropertiesTable extends Migration
             $table->foreign('type_id')->references('id')->on('properties_type');
             $table->foreign('contact_id')->references('id')->on('contacts');
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

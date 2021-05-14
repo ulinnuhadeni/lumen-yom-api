@@ -16,20 +16,24 @@ class AccomodationRepository {
     }
 
     public function get(){
-        $data = $this->accomodation
-                     ->select('name',
-                              'type_id',
-                              'contact_id',
-                              'license',
-                              'website',
-                              'address',
-                              'country',
-                              'province',
-                              'postal_code',
-                              'order_total_per_month as order_total' ,
-                              'credit_card_payment')
+        $data = DB::table('properties')
+                     ->join('properties_type', 'properties.type_id', '=', 'properties_type.id')
+                     ->join('contacts', 'properties.contact_id', '=', 'contacts.id')
+                     ->select('properties.id',
+                              'properties.name',
+                              'properties_type.type as type',
+                              'contacts.name as owner',
+                              'properties.license',
+                              'properties.website',
+                              'properties.address',
+                              'properties.province',
+                              'properties.country',
+                              'properties.postal_code',
+                              'properties.order_total_per_month as order_total',
+                              'properties.credit_card_payment')
                      ->orderBy('id')
                      ->get();
+
         return $data;
     }
 
