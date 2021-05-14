@@ -5,17 +5,20 @@ namespace App\Repositories;
 use App\Models\PropertyType;
 use Illuminate\Support\Facades\DB;
 
-class PropertyTypeRepository {
+class PropertyTypeRepository
+{
 
-    public function __construct(PropertyType $type){
+    public function __construct(PropertyType $type)
+    {
         $this->type = $type;
     }
 
-    public function get(){
+    public function get()
+    {
         $data = DB::table('properties_type')
-                  ->select('type')
-                  ->orderBy('id')
-                  ->get();
+            ->select('id', 'type')
+            ->orderBy('id')
+            ->get();
         return $data;
     }
 
@@ -31,7 +34,8 @@ class PropertyTypeRepository {
         return $result;
     }
 
-    public function insert($input){
+    public function insert($input)
+    {
         $result = $this->type->create($input);
         return $result;
     }

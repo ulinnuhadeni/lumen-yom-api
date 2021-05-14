@@ -4,17 +4,16 @@ namespace App\Repositories;
 
 use App\Models\PropertyContact;
 
-class PropertyContactRepository {
+class PropertyContactRepository
+{
 
-    public function __construct(PropertyContact $contact){
+    public function __construct(PropertyContact $contact)
+    {
         $this->contact = $contact;
     }
 
-    public function jsonResponse($message, $data, $code){
-        return response()->json(['message' => $message, 'data' => $data], $code);
-    }
-
-    public function get(){
+    public function get()
+    {
         $data = $this->contact->orderBy('id')->get();
         return $data;
     }
@@ -31,7 +30,8 @@ class PropertyContactRepository {
         return $result;
     }
 
-    public function insert($input){
+    public function insert($input)
+    {
         $result = $this->contact->create($input);
         return $result;
     }

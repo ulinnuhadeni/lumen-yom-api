@@ -2,37 +2,39 @@
 
 namespace App\Repositories;
 
+use App\Libraries\Helper;
 use App\Models\Accomodation;
 use Illuminate\Support\Facades\DB;
 
-class AccomodationRepository {
+class AccomodationRepository
+{
 
-    public function __construct(Accomodation $accomodation){
+    public function __construct(Accomodation $accomodation)
+    {
         $this->accomodation = $accomodation;
     }
 
-    public function jsonResponse($message, $data, $code){
-        return response()->json(['message' => $message, 'data' => $data], $code);
-    }
-
-    public function get(){
+    public function get()
+    {
         $data = DB::table('properties')
-                     ->join('properties_type', 'properties.type_id', '=', 'properties_type.id')
-                     ->join('contacts', 'properties.contact_id', '=', 'contacts.id')
-                     ->select('properties.id',
-                              'properties.name',
-                              'properties_type.type as type',
-                              'contacts.name as owner',
-                              'properties.license',
-                              'properties.website',
-                              'properties.address',
-                              'properties.province',
-                              'properties.country',
-                              'properties.postal_code',
-                              'properties.order_total_per_month as order_total',
-                              'properties.credit_card_payment')
-                     ->orderBy('id')
-                     ->get();
+            ->join('properties_type', 'properties.type_id', '=', 'properties_type.id')
+            ->join('contacts', 'properties.contact_id', '=', 'contacts.id')
+            ->select(
+                'properties.id',
+                'properties.name',
+                'properties_type.type as type',
+                'contacts.name as Owner Name',
+                'properties.license',
+                'properties.website',
+                'properties.address',
+                'properties.province',
+                'properties.country',
+                'properties.postal_code',
+                'properties.order_total_per_month as order_total',
+                'properties.credit_card_payment'
+            )
+            ->orderBy('id')
+            ->get();
 
         return $data;
     }
@@ -49,7 +51,8 @@ class AccomodationRepository {
         return $result;
     }
 
-    public function insert($input){
+    public function insert($input)
+    {
         $result = $this->accomodation->create($input);
         return $result;
     }
