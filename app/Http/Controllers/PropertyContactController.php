@@ -19,7 +19,7 @@ class PropertyContactController extends Controller
     public function index()
     {
         $data = $this->contact->get();
-        $dataResponse = $this->helper->jsonResponse('Accomodation contact data', $data, 200);
+        $dataResponse = $this->helper->jsonResponse('Contact data', $data, 200);
         return $dataResponse;
     }
 
@@ -27,13 +27,21 @@ class PropertyContactController extends Controller
     {
         if (is_numeric($params)) {
             $data = $this->contact->find($params);
-            $dataResponse = $this->helper->jsonResponse('Accomodation data contact id : ' . $params . '', $data, 200);
-            return $dataResponse;
+            if ($data == null) {
+                $dataResponse = $this->helper->jsonResponse('Contact data id : ' . $params . '', 'Data not Available or Not Found', 404);
+            } else {
+                $dataResponse = $this->helper->jsonResponse('Contact data id : ' . $params . '', $data, 200);
+            }
         } else {
             $data = $this->contact->findBy('name', $params);
-            $dataResponse = $this->helper->jsonResponse('Accomodation data contact : ' . $params . '', $data, 200);
-            return $dataResponse;
+            if (isset($data)) {
+                $dataResponse = $this->helper->jsonResponse('Contact data id : ' . $params . '', 'Data not Available or Not Found', 404);
+            } else {
+                $dataResponse = $this->helper->jsonResponse('Contact data : ' . $params . '', $data, 200);
+            }
         }
+
+        return $dataResponse;
     }
 
     public function store(Request $request)
